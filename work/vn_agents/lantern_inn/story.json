@@ -1,0 +1,598 @@
+{
+  "id": "lantern_inn",
+  "title": "灯影客栈",
+  "subtitle": "雨一停，名字便会醒来",
+  "version": 1,
+  "start": "rain_gate",
+  "variables": {
+    "truth": 0,
+    "mercy": 0,
+    "resolve": 0,
+    "pact": 0
+  },
+  "scenes": {
+    "rain_inn": {
+      "sheet": "scene-sheet.png",
+      "quadrant": 0,
+      "label": "中国古典夜雨客栈"
+    },
+    "lantern_corridor": {
+      "sheet": "scene-sheet.png",
+      "quadrant": 1,
+      "label": "灯笼走廊"
+    },
+    "ledger_room": {
+      "sheet": "scene-sheet.png",
+      "quadrant": 2,
+      "label": "旧账房"
+    },
+    "dawn_road": {
+      "sheet": "scene-sheet.png",
+      "quadrant": 3,
+      "label": "黎明山路"
+    }
+  },
+  "nodes": [
+    {
+      "id": "rain_gate",
+      "scene": "rain_inn",
+      "speaker": "旁白",
+      "text": "子夜的山雨把来路洗得一片空白。你在岔路尽头看见一间没有招牌的客栈，两盏灯笼隔着雨幕一明一灭。檐下挂着一串铜铃，风很大，它们却一声不响。",
+      "choices": [
+        {
+          "text": "敲正门，借宿一夜",
+          "next": "front_desk",
+          "effects": {
+            "pact": 1
+          }
+        },
+        {
+          "text": "先绕到侧廊，看看灯为什么不灭",
+          "next": "eaves_shadow",
+          "effects": {
+            "truth": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "front_desk",
+      "scene": "rain_inn",
+      "speaker": "顾掌柜",
+      "text": "门自己开了。柜台后的女人像是早已等了许久，只问你一句：『住店可以，不收银钱，只收一个能叫醒你的名字。』她推来一张空白名帖，墨却在纸上自行洇开。",
+      "choices": [
+        {
+          "text": "写下自己的真名",
+          "next": "lantern_corridor",
+          "effects": {
+            "pact": 2
+          }
+        },
+        {
+          "text": "写一个临时想出的假名",
+          "next": "guest_room",
+          "effects": {
+            "truth": 1,
+            "resolve": 1
+          }
+        },
+        {
+          "text": "把名帖推回去，问她认不认识你",
+          "next": "steward_truth",
+          "effects": {
+            "truth": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "eaves_shadow",
+      "scene": "rain_inn",
+      "speaker": "旁白",
+      "text": "侧廊没有门，只有一串湿漉漉的小脚印，走到墙边便断了。墙内传来孩子数灯的声音：『九十八、九十九……还差你的这一盏。』一只纸做的小手从窗缝里递出半截灯芯。",
+      "choices": [
+        {
+          "text": "接过灯芯，跟着脚印进去",
+          "next": "child_shadow",
+          "effects": {
+            "mercy": 2
+          }
+        },
+        {
+          "text": "不接，推开旁边虚掩的后门",
+          "next": "guest_room",
+          "effects": {
+            "truth": 1,
+            "resolve": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "lantern_corridor",
+      "scene": "lantern_corridor",
+      "speaker": "旁白",
+      "text": "顾掌柜领你穿过长廊。每一盏灯下都挂着一枚木牌，牌上没有字，却能听见不同的呼吸。走到第十二扇门前，她忽然停下：『这间房，你十二年前住过。』",
+      "choices": [
+        {
+          "text": "推开第十二扇门",
+          "next": "portrait_wall",
+          "effects": {
+            "truth": 1
+          }
+        },
+        {
+          "text": "走向走廊尽头唯一没点亮的房间",
+          "next": "bronze_mirror",
+          "effects": {
+            "resolve": 1
+          }
+        },
+        {
+          "text": "追问十二年前发生过什么",
+          "next": "steward_truth",
+          "effects": {
+            "truth": 1,
+            "pact": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "guest_room",
+      "scene": "lantern_corridor",
+      "speaker": "旁白",
+      "text": "客房里摆着一只与你行囊一模一样的旧箱子，箱角长满十二年的霉斑。床边铜镜蒙着黑布，镜后有人用指甲轻轻敲了三下。你的湿衣还在滴水，旧箱却先替你在地板上留下了水迹。",
+      "choices": [
+        {
+          "text": "打开那只旧箱子",
+          "next": "wet_luggage",
+          "effects": {
+            "truth": 2
+          }
+        },
+        {
+          "text": "揭开铜镜上的黑布",
+          "next": "bronze_mirror",
+          "effects": {
+            "truth": 1
+          }
+        },
+        {
+          "text": "循着门外孩子的哼唱声离开",
+          "next": "child_shadow",
+          "effects": {
+            "mercy": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "child_shadow",
+      "scene": "lantern_corridor",
+      "speaker": "阿烛",
+      "text": "灯影里站着一个没有影子的女孩，自称阿烛。她说客栈每天清晨都会送走一位客人，却也会从那人身上留下一段最舍不得的记忆。『把灯心还给我，我就告诉你，谁把你拆成了两个人。』",
+      "choices": [
+        {
+          "text": "先答应她，保护这点微弱灯火",
+          "next": "lamp_heart",
+          "effects": {
+            "mercy": 2,
+            "pact": 1
+          }
+        },
+        {
+          "text": "要求她先说清楚“另一个人”是谁",
+          "next": "steward_truth",
+          "effects": {
+            "truth": 2
+          }
+        },
+        {
+          "text": "试探她是否也在借你的记忆活着",
+          "next": "account_room",
+          "effects": {
+            "truth": 1,
+            "resolve": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "portrait_wall",
+      "scene": "lantern_corridor",
+      "speaker": "旁白",
+      "text": "门后不是房间，而是一墙被烟熏黑的旧画像。最中央的人与你长着同一张脸，手里却提着掌柜的铜灯。画像角落题着年份：整整一百二十年前。背面还压着一句话——『若我回来，别让我认出自己。』",
+      "choices": [
+        {
+          "text": "触碰画像，接受涌来的旧记忆",
+          "next": "memory_hall",
+          "effects": {
+            "truth": 2,
+            "resolve": 1
+          }
+        },
+        {
+          "text": "把画像带去质问顾掌柜",
+          "next": "face_steward",
+          "effects": {
+            "truth": 1,
+            "resolve": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "bronze_mirror",
+      "scene": "lantern_corridor",
+      "speaker": "镜中人",
+      "text": "铜镜里没有你的倒影，只有一条天亮后的山路。镜中人背对你说：『客栈并不困人。真正困住你的，是你每次走到这里，都选择忘记。』它抬起手，掌心写着顾掌柜刚才索要的那个名字。",
+      "choices": [
+        {
+          "text": "问镜中人：我究竟忘了谁",
+          "next": "memory_hall",
+          "effects": {
+            "truth": 2
+          }
+        },
+        {
+          "text": "打碎铜镜，逼客栈显出真相",
+          "next": "dry_well",
+          "effects": {
+            "resolve": 2
+          }
+        },
+        {
+          "text": "重新盖上黑布，不相信镜中之言",
+          "next": "account_room",
+          "effects": {
+            "pact": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "wet_luggage",
+      "scene": "ledger_room",
+      "speaker": "旁白",
+      "text": "旧箱里没有衣物，只有十二张已经发黄的住店名帖，每张都由你亲手写下不同的名字。最下面压着一册欠名簿：客栈收走的从来不是姓名，而是那些无处安放、又不肯消散的人生。你的那一页却写着『掌灯者』。",
+      "choices": [
+        {
+          "text": "撕下自己的那一页",
+          "next": "ledger_collapse",
+          "effects": {
+            "resolve": 2,
+            "truth": 1
+          }
+        },
+        {
+          "text": "抄下所有被收走的名字",
+          "next": "account_room",
+          "effects": {
+            "mercy": 1,
+            "truth": 2
+          }
+        },
+        {
+          "text": "原样合上，先去找掌柜谈条件",
+          "next": "face_steward",
+          "effects": {
+            "pact": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "account_room",
+      "scene": "ledger_room",
+      "speaker": "旁白",
+      "text": "账房里并排放着三册旧簿：欠名簿记着被留下的人，归灯簿记着被送走的人，最薄的一册没有封皮，只在第一页写着你的笔迹——『灯不该永远属于掌灯者。』油灯每跳一下，书页里就传出一声叹息。",
+      "choices": [
+        {
+          "text": "查欠名簿，先释放最久的客人",
+          "next": "ledger_collapse",
+          "effects": {
+            "mercy": 2,
+            "truth": 1
+          }
+        },
+        {
+          "text": "查归灯簿，寻找阿烛的来历",
+          "next": "lamp_heart",
+          "effects": {
+            "truth": 2,
+            "mercy": 1
+          }
+        },
+        {
+          "text": "把无名薄册交给顾掌柜",
+          "next": "face_steward",
+          "effects": {
+            "pact": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "dry_well",
+      "scene": "lantern_corridor",
+      "speaker": "旁白",
+      "text": "镜子碎裂后，长廊塌成一座没有水的井。井底不是泥土，而是清晨的天空；无数被遗忘的声音在下面喊你的旧称呼。井绳上系着一只铜铃，只要摇响，所有住客都会同时醒来——也可能再也回不到梦里。",
+      "choices": [
+        {
+          "text": "摇响铜铃，让所有人一起面对真相",
+          "next": "face_steward",
+          "effects": {
+            "resolve": 2,
+            "mercy": 1
+          }
+        },
+        {
+          "text": "沿井绳下去，寻找声音的源头",
+          "next": "memory_hall",
+          "effects": {
+            "truth": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "steward_truth",
+      "scene": "lantern_corridor",
+      "speaker": "顾掌柜",
+      "text": "顾掌柜终于承认：这里不是害人的鬼店，而是替迷路之人保管姓名的渡口。最初的规矩很温柔——忘掉一段痛，换一夜安眠。可一百年过去，账簿学会了饥饿，开始把『舍不得』也算作欠债。她只是守店人，不能改第一任掌灯者写下的契。",
+      "choices": [
+        {
+          "text": "逼她带你去见第一任掌灯者",
+          "next": "memory_hall",
+          "effects": {
+            "truth": 2,
+            "resolve": 1
+          }
+        },
+        {
+          "text": "先救阿烛，再谈客栈的规矩",
+          "next": "lamp_heart",
+          "effects": {
+            "mercy": 2
+          }
+        },
+        {
+          "text": "接受客栈仍需契约，但要求重写",
+          "next": "face_steward",
+          "effects": {
+            "pact": 2,
+            "truth": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "face_steward",
+      "scene": "ledger_room",
+      "speaker": "顾掌柜",
+      "text": "你把证据放在桌上，顾掌柜却跪下，将铜灯递给你。『我从没等救客栈的人。我等的是写下第一条规矩的人。』灯火照亮她逐渐透明的手——每隔十二年，她都陪你查到这里，再依照你的请求，替你抹去真相。",
+      "choices": [
+        {
+          "text": "接过铜灯，承担自己写下的旧契",
+          "next": "memory_hall",
+          "effects": {
+            "pact": 2,
+            "truth": 1
+          }
+        },
+        {
+          "text": "拒绝循环，命令账簿释放所有名字",
+          "next": "ledger_collapse",
+          "effects": {
+            "resolve": 2,
+            "mercy": 1
+          }
+        },
+        {
+          "text": "问她为何一次次听从你遗忘的请求",
+          "next": "lamp_heart",
+          "effects": {
+            "mercy": 1,
+            "truth": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "memory_hall",
+      "scene": "ledger_room",
+      "speaker": "旧日的你",
+      "text": "铜灯打开了一段被封存的记忆：百年前，你为战乱中找不到归路的人建了这间客栈。为了让规则永不偏私，你把自己的怜悯割成一个孩子，取名阿烛，再把自己变成只认契约的掌灯者。可失去怜悯后，你亲手写下的规则也越来越冷。你不是受害者，而是那场善意失控的起点。",
+      "choices": [
+        {
+          "text": "承认阿烛就是被你舍弃的那部分自己",
+          "next": "lamp_heart",
+          "effects": {
+            "truth": 2,
+            "mercy": 2
+          }
+        },
+        {
+          "text": "拒绝旧身份，只为今夜的选择负责",
+          "next": "ledger_collapse",
+          "effects": {
+            "resolve": 2
+          }
+        },
+        {
+          "text": "取回掌灯者的权柄，准备修改契约",
+          "next": "dawn_verdict",
+          "effects": {
+            "pact": 2,
+            "truth": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "lamp_heart",
+      "scene": "ledger_room",
+      "speaker": "阿烛",
+      "text": "阿烛把灯芯放进铜灯。她的影子终于落在地上，却与你的影子严丝合缝。她说，灯里攒着九十九段记忆，足够让她成为真正的人；也足够分给九十九位客人，让他们带着完整的自己走向天亮。两件事只能选一件。",
+      "choices": [
+        {
+          "text": "把全部灯火交给阿烛，让她活下去",
+          "next": "dawn_verdict",
+          "effects": {
+            "pact": 2,
+            "mercy": -1
+          }
+        },
+        {
+          "text": "把灯火分给所有住客，包括阿烛",
+          "next": "ledger_collapse",
+          "effects": {
+            "mercy": 3,
+            "truth": 1
+          }
+        },
+        {
+          "text": "熄灭灯心，让客栈再也无法索取记忆",
+          "next": "ledger_collapse",
+          "effects": {
+            "resolve": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "ledger_collapse",
+      "scene": "ledger_room",
+      "speaker": "旁白",
+      "text": "第一本账簿裂开时，整座客栈像一盏被风吹透的灯。成百上千个名字从纸上升起，撞向紧闭的门窗。雨声忽然停了，远处传来清晨的鸟鸣。你只来得及保住一样东西：众人的归路、自己的姓名，或一条仍能维持客栈的新规矩。",
+      "choices": [
+        {
+          "text": "护住众人的归路，放弃自己的旧名",
+          "next": "dawn_verdict",
+          "effects": {
+            "mercy": 2,
+            "resolve": 1
+          }
+        },
+        {
+          "text": "护住自己的姓名，带走全部真相",
+          "next": "dawn_verdict",
+          "effects": {
+            "truth": 2,
+            "pact": -1
+          }
+        },
+        {
+          "text": "用自己的名字补上空白，重写第一条规矩",
+          "next": "dawn_verdict",
+          "effects": {
+            "pact": 2,
+            "resolve": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "dawn_verdict",
+      "scene": "dawn_road",
+      "speaker": "旁白",
+      "text": "天边终于泛白，客栈的门第一次从里面照进晨光。四条山路在你脚下同时出现：一条通往人群，一条折回灯下，一条穿过无名的灰烬，还有一条和十二年前一模一样。你明白，最后的路不会替你选择。",
+      "choices": [
+        {
+          "text": "把灯火分给所有人，与你的旧名道别",
+          "next": "ending_shared_dawn",
+          "effects": {
+            "mercy": 1
+          },
+          "requires": {
+            "truth": 3,
+            "mercy": 3
+          },
+          "hint": "需要看清真相，也愿意把灯分给别人"
+        },
+        {
+          "text": "留下来掌灯，但让每位客人自由取回记忆",
+          "next": "ending_new_keeper",
+          "effects": {
+            "pact": 1
+          },
+          "requires": {
+            "pact": 3
+          },
+          "hint": "需要理解并承担契约"
+        },
+        {
+          "text": "烧尽旧契，接受自己也会被世界遗忘",
+          "next": "ending_white_ash",
+          "effects": {
+            "resolve": 1
+          },
+          "requires": {
+            "resolve": 3
+          },
+          "hint": "需要足够的决断"
+        },
+        {
+          "text": "签下旧名帖，只求独自离开",
+          "next": "ending_twelfth_rain",
+          "effects": {
+            "pact": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "ending_shared_dawn",
+      "scene": "dawn_road",
+      "speaker": "阿烛",
+      "text": "九十九点灯火飞过山路，分别落回九十九个人的胸口。阿烛没有变成一个完整的人，却在每个人记起温柔时短暂醒来。顾掌柜带着第一批客人走出晨雾，你站在路边，已想不起自己的旧名。可每个经过你的人，都叫得出一个你曾救过的名字。",
+      "choices": [],
+      "ending": {
+        "code": "shared_dawn",
+        "title": "结局一 · 众灯同明",
+        "tone": "hopeful",
+        "summary": "你失去旧名，却让所有人带着完整的自己离开。"
+      }
+    },
+    {
+      "id": "ending_new_keeper",
+      "scene": "rain_inn",
+      "speaker": "新掌灯者",
+      "text": "你把第一条规矩改成：『记忆只可暂存，不得抵押。』客栈仍在雨夜出现，却再也没有空白名帖。顾掌柜终于卸下百年的职守，阿烛坐在柜台上替迷路的人温一盏茶。很多年后，有旅人问掌灯者叫什么，你笑着指向门外——天亮时，路自然会告诉他。",
+      "choices": [],
+      "ending": {
+        "code": "new_keeper",
+        "title": "结局二 · 新灯旧店",
+        "tone": "warm_melancholy",
+        "summary": "你留下承担契约，并把客栈从牢笼改成真正的渡口。"
+      }
+    },
+    {
+      "id": "ending_white_ash",
+      "scene": "dawn_road",
+      "speaker": "旁白",
+      "text": "旧契烧成没有温度的白灰，客栈也在晨光中一寸寸透明。所有名字被风送回人间，只有你的名字没有归处。多年以后，山路上偶尔有人看见一盏无主的灯，替夜行者照过最险的一段路；等他们回头，灯与提灯的人都已不在。",
+      "choices": [],
+      "ending": {
+        "code": "white_ash",
+        "title": "结局三 · 无名灯",
+        "tone": "bittersweet",
+        "summary": "你毁掉索取记忆的规则，也从所有记录中消失。"
+      }
+    },
+    {
+      "id": "ending_twelfth_rain",
+      "scene": "rain_inn",
+      "speaker": "旁白",
+      "text": "你在名帖上写下一个新名字，独自走进清晨。身后的雨声立刻停止，仿佛什么也没发生。十二年后，又一个疲惫的旅人在山路尽头看见两盏灯笼。柜台后的新掌柜抬起脸——那正是你，只是你已经不记得，自己曾经来过。",
+      "choices": [],
+      "ending": {
+        "code": "twelfth_rain",
+        "title": "结局四 · 第十二场雨",
+        "tone": "cyclical",
+        "summary": "你以为自己离开了，却再次成为客栈循环的一部分。"
+      }
+    }
+  ]
+}
