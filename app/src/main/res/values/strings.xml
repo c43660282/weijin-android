@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">未尽</string>
+    <string name="notification_channel_name">未尽强提醒</string>
+    <string name="notification_channel_description">使用最高优先级、声音和振动显示未尽中的定时事项</string>
+</resources>
