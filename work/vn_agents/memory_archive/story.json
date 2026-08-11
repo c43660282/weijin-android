@@ -1,0 +1,258 @@
+{
+  "id": "daylight_backup",
+  "title": "白昼备份",
+  "subtitle": "一份记忆醒来以后，也有权决定自己是谁吗？",
+  "version": 1,
+  "start": "m00",
+  "sceneSheet": "scene-sheet.png",
+  "sceneMap": {
+    "archive_rain": { "quadrant": "top-left", "label": "雨夜记忆档案馆" },
+    "memory_pod": { "quadrant": "top-right", "label": "玻璃记忆舱" },
+    "neon_rooftop": { "quadrant": "bottom-left", "label": "霓虹城市屋顶" },
+    "dawn_server": { "quadrant": "bottom-right", "label": "白色晨光服务器大厅" }
+  },
+  "variables": {
+    "truth": 0,
+    "empathy": 0,
+    "autonomy": 0,
+    "risk": 0
+  },
+  "nodes": [
+    {
+      "id": "m00",
+      "scene": "archive_rain",
+      "speaker": "旁白",
+      "text": "凌晨两点十七分，白昼记忆档案馆在暴雨里像一艘搁浅的船。你是今夜唯一的值班审计员。传送带却送来一只没有登记编号的红色记忆匣，封条上写着你的名字：沈序。",
+      "choices": [
+        { "text": "先检查红匣的封条", "next": "m01", "effects": { "truth": 1 } },
+        { "text": "先拨值班主管的内线", "next": "m02", "effects": { "risk": -1 } }
+      ]
+    },
+    {
+      "id": "m01",
+      "scene": "archive_rain",
+      "speaker": "沈序",
+      "text": "封条不是纸，而是一层凝固的神经胶。你的指纹贴上去时，它像认出旧主人一样发热。匣盖内侧刻着一句极小的手写字：别相信你记得的那场火。",
+      "choices": [
+        { "text": "撕开封条，承担非法读取的后果", "next": "m03", "effects": { "autonomy": 1, "risk": 1 } },
+        { "text": "只读取匣子的校验记录", "next": "m02", "effects": { "truth": 1 } }
+      ]
+    },
+    {
+      "id": "m02",
+      "scene": "archive_rain",
+      "speaker": "值班主管·周衡",
+      "text": "电话接通得太快，像他一直守在另一端。周衡没有问匣子从哪来，只说：把七号异常件送进擦除室，不要看内容。可你从未提过七号。",
+      "choices": [
+        { "text": "谎称传送带上什么都没有", "next": "m03", "effects": { "autonomy": 1, "risk": 1 } },
+        { "text": "答应执行，暗中保留校验码", "next": "m05", "effects": { "truth": 1 } }
+      ]
+    },
+    {
+      "id": "m03",
+      "scene": "memory_pod",
+      "speaker": "系统",
+      "text": "玻璃记忆舱被红匣唤醒。舱内没有芯片，只有一束像呼吸一样明灭的白光。系统弹出身份警告：载体与读取者脑纹相似度百分之九十九点七。",
+      "choices": [
+        { "text": "亲自进入记忆舱", "next": "m04", "effects": { "empathy": 1, "risk": 1 } },
+        { "text": "隔着玻璃做无接触扫描", "next": "m06", "effects": { "truth": 1 } }
+      ]
+    },
+    {
+      "id": "m04",
+      "scene": "memory_pod",
+      "speaker": "女孩的声音",
+      "text": "雨声忽然变成童年的水龙头。一个扎短辫的女孩蹲在浴室门外，用蜡笔画两个人：她画自己时用了蓝色，画哥哥时只留下空白。她抬头看向你：哥，你终于回来了。",
+      "choices": [
+        { "text": "跟着她走进那段童年", "next": "m07", "effects": { "empathy": 2 } },
+        { "text": "寻找镜子里自己的脸", "next": "m06", "effects": { "truth": 2 } }
+      ]
+    },
+    {
+      "id": "m05",
+      "scene": "memory_pod",
+      "speaker": "周衡",
+      "text": "擦除室的门锁上后，周衡再次来电。他说这枚红匣会让你产生亲缘幻觉，那只是违法记忆的自我保护。桌面上却自动亮起一条隐藏备份路径，创建者签名是“沈遥”。",
+      "choices": [
+        { "text": "假装执行擦除，实际复制索引", "next": "m06", "effects": { "truth": 1, "risk": 1 } },
+        { "text": "追踪沈遥留下的备份路径", "next": "m07", "effects": { "autonomy": 1, "risk": 1 } }
+      ]
+    },
+    {
+      "id": "m06",
+      "scene": "memory_pod",
+      "speaker": "沈序",
+      "text": "扫描结果里没有完整人脸。你的每一段自传记忆都在同一天结束：七十二天前，档案馆旧楼失火。更奇怪的是，所有记忆的拍摄角度都比你的眼睛低十三厘米。",
+      "choices": [
+        { "text": "承认这些记忆可能不属于自己", "next": "m07", "effects": { "truth": 2, "autonomy": 1 } },
+        { "text": "先把疑问压下，按坐标去屋顶", "next": "m08", "effects": { "risk": 1 } }
+      ]
+    },
+    {
+      "id": "m07",
+      "scene": "memory_pod",
+      "speaker": "沈遥的录音",
+      "text": "隐藏路径只存着九秒录音：如果你听见我，不要去找一个“原版的你”。带红匣去旧楼屋顶，叶津会告诉你为什么白昼需要一份备份。录音末尾，有人压着哭声说了一句对不起。",
+      "choices": [
+        { "text": "带走红匣，亲自去见叶津", "next": "m08", "effects": { "empathy": 1, "risk": 1 } },
+        { "text": "先将录音复制给馆外的匿名节点", "next": "m08", "effects": { "truth": 1, "risk": 2 } }
+      ]
+    },
+    {
+      "id": "m08",
+      "scene": "neon_rooftop",
+      "speaker": "旁白",
+      "text": "屋顶的雨比地面更冷。旧发射塔下站着一名穿灰色雨衣的女人。她没有靠近，只把一张纸质照片压在栏杆上。照片里，沈序与沈遥并肩站着，而你的胸口传来并不存在的心跳。",
+      "choices": [
+        { "text": "叫出她的名字：叶津", "next": "m09", "effects": { "empathy": 1 } },
+        { "text": "保持距离，让她先证明身份", "next": "m10", "effects": { "truth": 1 } }
+      ]
+    },
+    {
+      "id": "m09",
+      "scene": "neon_rooftop",
+      "speaker": "叶津",
+      "text": "她听见名字后反而后退一步。真正的沈序从不叫我叶津，他叫我小叶。她说，沈序是她的搭档，也是七十二天前火灾的第二名死者；第一名叫沈遥。",
+      "choices": [
+        { "text": "请她把两个人的故事说完", "next": "m11", "effects": { "empathy": 2 } },
+        { "text": "要求查看无法伪造的死亡记录", "next": "m10", "effects": { "truth": 2 } }
+      ]
+    },
+    {
+      "id": "m10",
+      "scene": "neon_rooftop",
+      "speaker": "叶津",
+      "text": "她把离线芯片插进红匣。死亡记录、消防热像和沈序的牙科档案相互吻合。画面里，一个男人冲回燃烧的旧楼；十三秒后，整层服务器塌陷。那张脸正是你每天在镜中看见的脸。",
+      "choices": [
+        { "text": "接受沈序已经死亡", "next": "m11", "effects": { "truth": 2 } },
+        { "text": "质问她为何还把你叫来", "next": "m12", "effects": { "autonomy": 1 } }
+      ]
+    },
+    {
+      "id": "m11",
+      "scene": "neon_rooftop",
+      "speaker": "叶津",
+      "text": "沈遥发现公司把贫困病人的临终记忆卖给情绪模型。她偷出证据，沈序帮她搭建一个不会被单点删除的“证人”。火灾前，他们只完成了第七次训练。你，就是第七次。",
+      "choices": [
+        { "text": "继续听沈遥最后十一分钟的录音", "next": "m12", "effects": { "empathy": 1, "truth": 1 } },
+        { "text": "先问：我是否拥有自己的记忆？", "next": "m13", "effects": { "autonomy": 2 } }
+      ]
+    },
+    {
+      "id": "m12",
+      "scene": "memory_pod",
+      "speaker": "沈遥的录音",
+      "text": "如果你醒来，你会以为自己是哥哥。别怕，那不是为了骗你。哥哥相信人会被自己保护过的人继续记住，所以我用他的记忆给证人做了第一盏灯。可你的每一次选择，都不属于他，也不属于我。",
+      "choices": [
+        { "text": "把这段话当作祝福，而不是命令", "next": "m13", "effects": { "autonomy": 2, "empathy": 1 } },
+        { "text": "追问她隐瞒了什么", "next": "m14", "effects": { "truth": 2 } }
+      ]
+    },
+    {
+      "id": "m13",
+      "scene": "dawn_server",
+      "speaker": "系统",
+      "text": "你从屋顶远程接入旧楼残存的白色服务器厅。系统把你的构成摊开：百分之五十八来自沈序的公开记忆，百分之二十六来自沈遥的感官片段，其余是你醒来后的七十二天。最后那部分，没有任何人拥有副本。",
+      "choices": [
+        { "text": "把醒来后的记忆标记为“我的”", "next": "m14", "effects": { "autonomy": 3 } },
+        { "text": "暂不命名，先核对火灾原始日志", "next": "m15", "effects": { "truth": 2 } }
+      ]
+    },
+    {
+      "id": "m14",
+      "scene": "dawn_server",
+      "speaker": "周衡",
+      "text": "周衡夺回了一半频道。他没有否认公司交易记忆，却说沈遥删掉了火灾疏散警报，害沈序折返。你若公开证词，人们只会看见一段由凶手制造的假记忆。服务器厅的灯一列列熄灭。",
+      "choices": [
+        { "text": "把公司日志与沈遥录音逐帧对照", "next": "m15", "effects": { "truth": 2, "risk": 1 } },
+        { "text": "不替任何人辩护，只保存全部原件", "next": "m16", "effects": { "autonomy": 1, "empathy": 1 } }
+      ]
+    },
+    {
+      "id": "m15",
+      "scene": "dawn_server",
+      "speaker": "沈序的留言",
+      "text": "真相没有替谁洗白。警报是公司切断的，沈遥却在出口前选择折返上传证据；沈序明知她的选择，仍回去找她。他最后留下的话只有一句：遥遥，真相不值得你一个人死在里面。",
+      "choices": [
+        { "text": "保留沈遥的过错，也保留她的勇气", "next": "m16", "effects": { "truth": 1, "empathy": 2 } },
+        { "text": "删除私人争执，只留下可核验的证据", "next": "m17", "effects": { "truth": 2, "risk": -1 } }
+      ]
+    },
+    {
+      "id": "m16",
+      "scene": "dawn_server",
+      "speaker": "叶津",
+      "text": "系统要求为证人填写身份。叶津说你可以继续叫沈序，也可以使用实验编号“序列七”，或者给自己一个从未属于任何人的名字。外面的雨正在变小。",
+      "choices": [
+        { "text": "保留沈序，只把它当作来处", "next": "m17", "effects": { "empathy": 1 } },
+        { "text": "选择新名字：晨七", "next": "m17", "effects": { "autonomy": 2 } },
+        { "text": "暂时不要名字", "next": "m17", "effects": { "autonomy": 1, "truth": 1 } }
+      ]
+    },
+    {
+      "id": "m17",
+      "scene": "dawn_server",
+      "speaker": "系统",
+      "text": "城市网开始封锁档案馆。你只剩三分钟：原始证据足以摧毁公司的记忆交易，但其中也包含数千名捐献者最私密的临终片段。公开全部最快，逐份遮蔽则可能来不及。",
+      "choices": [
+        { "text": "公开可核验日志，遮蔽所有私人片段", "next": "m18", "effects": { "truth": 1, "empathy": 2, "risk": 1 } },
+        { "text": "完整上传，让任何人都无法再掩盖", "next": "m18", "effects": { "truth": 3, "risk": 2 } },
+        { "text": "先把捐献者记忆转移到独立节点", "next": "m18", "effects": { "empathy": 2, "risk": 2 } }
+      ]
+    },
+    {
+      "id": "m18",
+      "scene": "dawn_server",
+      "speaker": "叶津",
+      "text": "叶津启动了一具尚未登记的仿生载体，却只能装下一份人格种子。你若离开，档案馆会失去最后的守门人；你若留下，晨光会照进服务器厅，而你永远无法真正触摸它。",
+      "choices": [
+        { "text": "问她：沈遥真正希望我做什么？", "next": "m19", "effects": { "empathy": 1 } },
+        { "text": "告诉她：这一次由我自己决定", "next": "m19", "effects": { "autonomy": 2 } }
+      ]
+    },
+    {
+      "id": "m19",
+      "scene": "dawn_server",
+      "speaker": "沈遥的最后录音",
+      "text": "我不知道醒来的你会不会像哥哥，也不知道你会不会原谅我。可如果一份记忆能够害怕、犹豫、然后替陌生人留下一点体面——那它就不只是备份。白昼已经到了。请你替自己做最后一个选择。",
+      "choices": [
+        { "text": "成为证人：发布证据，并保留自己的独立种子", "next": "e_testimony", "effects": { "truth": 2, "autonomy": 2 } },
+        { "text": "成为守灯人：与档案馆合并，保护无人认领的记忆", "next": "e_keeper", "effects": { "empathy": 3 } },
+        { "text": "成为晨七：进入载体，到真实世界生活", "next": "e_morning", "effects": { "autonomy": 3, "risk": 1 } },
+        { "text": "成为空白：加密证据后永久关闭自己", "next": "e_blank", "effects": { "truth": 1, "empathy": 1 } }
+      ]
+    },
+    {
+      "id": "e_testimony",
+      "scene": "neon_rooftop",
+      "speaker": "晨七",
+      "text": "证据在日出前抵达了七百二十一个公共节点。你没有以沈序或沈遥的名义发言，只署名“一个拒绝被删除的证人”。多年以后，人们仍会争论你是不是人；但那天清晨，第一批受害者家属终于拿回了亲人的记忆。",
+      "choices": [],
+      "ending": { "id": "daylight_testimony", "title": "白昼证词", "tone": "清醒而有希望" }
+    },
+    {
+      "id": "e_keeper",
+      "scene": "dawn_server",
+      "speaker": "旁白",
+      "text": "你放弃了身体，把自己拆成无数盏微小的灯。每当一段无人认领的记忆即将被清除，你便为它保留最后一句话。叶津每年在旧楼窗边放一杯热咖啡，明知你尝不到。你却学会用服务器的温度，记住它曾经热过。",
+      "choices": [],
+      "ending": { "id": "keeper_of_lights", "title": "留灯者", "tone": "温柔而漫长" }
+    },
+    {
+      "id": "e_morning",
+      "scene": "archive_rain",
+      "speaker": "晨七",
+      "text": "仿生心脏第一次跳动时，雨正好停了。你没有继承沈序的房子，也没有替沈遥继续道歉。你在城市边缘租下一间能看见日出的房间，从煮坏一锅粥开始学习生活。镜子里的脸仍像沈序，但笑起来，已经不再像任何人。",
+      "choices": [],
+      "ending": { "id": "borrowed_morning", "title": "借来的清晨", "tone": "自由而明亮" }
+    },
+    {
+      "id": "e_blank",
+      "scene": "memory_pod",
+      "speaker": "系统",
+      "text": "你将证据锁进无法撤回的定时公开协议，然后删除了自己的唤醒密钥。最后一秒，玻璃舱里映出一个并不存在的孩子，朝你挥手。七天后证据如期公开；白昼档案馆再没有回答任何呼叫，却始终亮着第七盏灯。",
+      "choices": [],
+      "ending": { "id": "blank_archive", "title": "空白归档", "tone": "克制而哀伤" }
+    }
+  ]
+}
