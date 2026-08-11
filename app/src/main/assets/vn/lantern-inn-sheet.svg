@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#183243"/><stop offset=".52" stop-color="#101822"/><stop offset="1" stop-color="#080b12"/></linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6d392e"/><stop offset=".55" stop-color="#2e2023"/><stop offset="1" stop-color="#13141a"/></linearGradient>
+    <linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#efcfa8"/><stop offset=".42" stop-color="#a4b9b3"/><stop offset="1" stop-color="#3f5f5d"/></linearGradient>
+    <radialGradient id="lantern"><stop stop-color="#fff1b9"/><stop offset=".3" stop-color="#f6b45e"/><stop offset=".72" stop-color="#bd5b3b"/><stop offset="1" stop-color="#6d2730"/></radialGradient>
+    <radialGradient id="mist"><stop stop-color="#dbe8df" stop-opacity=".5"/><stop offset="1" stop-color="#dbe8df" stop-opacity="0"/></radialGradient>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="15" flood-color="#020309" flood-opacity=".7"/></filter>
+    <clipPath id="p1"><rect x="0" y="0" width="590" height="590" rx="2"/></clipPath>
+    <clipPath id="p2"><rect x="610" y="0" width="590" height="590" rx="2"/></clipPath>
+    <clipPath id="p3"><rect x="0" y="610" width="590" height="590" rx="2"/></clipPath>
+    <clipPath id="p4"><rect x="610" y="610" width="590" height="590" rx="2"/></clipPath>
+  </defs>
+  <rect width="1200" height="1200" fill="#070910"/>
+
+  <!-- rainy mountain inn -->
+  <g clip-path="url(#p1)">
+    <rect width="590" height="590" fill="url(#night)"/>
+    <circle cx="480" cy="95" r="150" fill="#588193" opacity=".1" filter="url(#soft)"/>
+    <path d="M-30 300 Q100 190 220 286 Q350 130 640 305 L640 420 L-30 420Z" fill="#0b131a"/>
+    <path d="M-30 360 Q95 270 210 340 Q345 214 640 352 L640 470 L-30 470Z" fill="#101e25" opacity=".9"/>
+    <g filter="url(#shadow)">
+      <path d="M105 319 L278 209 L467 316 Z" fill="#18151a"/>
+      <path d="M82 325 L278 191 L493 325 L460 342 L278 231 L117 344Z" fill="#382326"/>
+      <rect x="126" y="319" width="302" height="168" fill="url(#wood)"/>
+      <rect x="238" y="344" width="82" height="143" rx="2" fill="#17151a"/>
+      <rect x="151" y="353" width="61" height="67" fill="#271b20"/><path d="M151 386h61M181 353v67" stroke="#8b5140" stroke-width="3"/>
+      <rect x="348" y="353" width="61" height="67" fill="#271b20"/><path d="M348 386h61M378 353v67" stroke="#8b5140" stroke-width="3"/>
+      <g filter="url(#glow)"><circle cx="180" cy="332" r="15" fill="url(#lantern)"/><circle cx="376" cy="332" r="15" fill="url(#lantern)"/><circle cx="277" cy="292" r="13" fill="url(#lantern)"/></g>
+    </g>
+    <path d="M230 590 Q260 495 278 450 Q308 510 342 590Z" fill="#1a2527"/>
+    <ellipse cx="278" cy="510" rx="34" ry="55" fill="#070a0f" opacity=".86"/>
+    <g stroke="#a9ced4" stroke-width="2" opacity=".23">
+      <path d="M15-40L-70 600M85-40L0 600M155-40L70 600M225-40L140 600M295-40L210 600M365-40L280 600M435-40L350 600M505-40L420 600M575-40L490 600M645-40L560 600"/>
+    </g>
+    <ellipse cx="135" cy="490" rx="220" ry="75" fill="url(#mist)" filter="url(#soft)"/>
+  </g>
+
+  <!-- lantern corridor -->
+  <g clip-path="url(#p2)" transform="translate(610 0)">
+    <rect width="590" height="590" fill="url(#wood)"/>
+    <path d="M0 0H590L430 420H160Z" fill="#15151a"/>
+    <path d="M0 590H590L430 270H160Z" fill="#20191c"/>
+    <path d="M0 0L160 145V420L0 590Z" fill="#40272a"/><path d="M590 0L430 145V420L590 590Z" fill="#291e23"/>
+    <g stroke="#9a5c43" stroke-width="8" opacity=".56"><path d="M82 0v590M508 0v590"/><path d="M146 0v590M444 0v590"/></g>
+    <g stroke="#bd7b58" stroke-width="3" opacity=".42"><path d="M0 105h150M0 205h150M0 305h150M440 105h150M440 205h150M440 305h150"/></g>
+    <path d="M295 0v205" stroke="#4d342f" stroke-width="4"/>
+    <g filter="url(#glow)"><ellipse cx="295" cy="200" rx="27" ry="36" fill="url(#lantern)"/><ellipse cx="220" cy="123" rx="19" ry="26" fill="url(#lantern)" opacity=".88"/><ellipse cx="370" cy="123" rx="19" ry="26" fill="url(#lantern)" opacity=".88"/></g>
+    <path d="M276 477 Q282 382 295 342 Q314 385 320 477Z" fill="#080a0f"/><circle cx="296" cy="332" r="18" fill="#080a0f"/>
+    <path d="M160 420L0 590M430 420L590 590M210 420L122 590M380 420L468 590" stroke="#745041" stroke-width="3" opacity=".45"/>
+    <ellipse cx="297" cy="370" rx="170" ry="120" fill="#e69b62" opacity=".08" filter="url(#soft)"/>
+  </g>
+
+  <!-- account room, ledger and mirror -->
+  <g clip-path="url(#p3)" transform="translate(0 610)">
+    <rect width="590" height="590" fill="#10151b"/>
+    <radialGradient id="deskLight"><stop stop-color="#d9995f" stop-opacity=".42"/><stop offset="1" stop-color="#d9995f" stop-opacity="0"/></radialGradient>
+    <ellipse cx="285" cy="348" rx="260" ry="220" fill="url(#deskLight)"/>
+    <rect x="55" y="343" width="486" height="247" fill="url(#wood)"/>
+    <path d="M67 354H530" stroke="#aa6f4a" stroke-width="3" opacity=".38"/>
+    <g transform="rotate(-4 285 390)" filter="url(#shadow)">
+      <path d="M165 277Q250 250 292 286V474Q236 440 164 457Z" fill="#d4bf92"/>
+      <path d="M292 286Q354 248 435 282L430 459Q352 438 292 474Z" fill="#c7ac7f"/>
+      <path d="M292 286V474" stroke="#7c5542" stroke-width="3"/>
+      <g stroke="#6d5043" stroke-width="3" opacity=".42"><path d="M190 320h72M185 350h84M181 382h90M329 319h78M326 351h84M325 384h77"/></g>
+    </g>
+    <g transform="translate(65 205)"><rect width="112" height="94" rx="8" fill="#3b2421"/><g stroke="#bf754d" stroke-width="4"><path d="M14 23h84M14 48h84M14 73h84"/></g><g fill="#cf9968"><circle cx="38" cy="23" r="7"/><circle cx="70" cy="48" r="7"/><circle cx="52" cy="73" r="7"/></g></g>
+    <ellipse cx="475" cy="180" rx="73" ry="112" fill="#15181d" stroke="#7b584b" stroke-width="13"/><path d="M450 85Q520 183 445 275" fill="none" stroke="#b9c4bd" stroke-width="3" opacity=".42"/><path d="M475 77L451 276" stroke="#b9c4bd" stroke-width="3" opacity=".32"/>
+    <rect x="115" y="120" width="8" height="115" rx="4" fill="#dcc99a"/><ellipse cx="119" cy="114" rx="16" ry="27" fill="url(#lantern)" filter="url(#glow)"/><path d="M119 84Q133 66 122 49" stroke="#a6abb1" stroke-width="4" fill="none" opacity=".5"/>
+  </g>
+
+  <!-- dawn road -->
+  <g clip-path="url(#p4)" transform="translate(610 610)">
+    <rect width="590" height="590" fill="url(#dawn)"/>
+    <circle cx="443" cy="114" r="92" fill="#ffe9be" opacity=".68" filter="url(#soft)"/>
+    <path d="M-50 250Q80 135 210 238Q335 100 640 260V420H-50Z" fill="#5e7772" opacity=".7"/>
+    <path d="M-50 340Q120 214 245 338Q410 206 640 354V500H-50Z" fill="#385a57" opacity=".88"/>
+    <path d="M205 590Q236 462 294 385Q345 481 404 590Z" fill="#b3a37c" opacity=".76"/>
+    <path d="M279 590Q286 461 294 385" stroke="#eee0b7" stroke-width="5" opacity=".48"/>
+    <g transform="translate(165 406)" filter="url(#shadow)"><ellipse cx="0" cy="72" rx="70" ry="25" fill="#364d45"/><rect x="-18" y="5" width="36" height="63" rx="13" fill="#6b3130"/><circle cy="26" r="25" fill="url(#lantern)" filter="url(#glow)"/><path d="M0 0v-33" stroke="#3a2e29" stroke-width="5"/></g>
+    <g fill="#e5eee6" opacity=".25" filter="url(#soft)"><ellipse cx="90" cy="290" rx="190" ry="55"/><ellipse cx="470" cy="335" rx="210" ry="62"/><ellipse cx="300" cy="470" rx="260" ry="45"/></g>
+  </g>
+</svg>
