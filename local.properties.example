@@ -1,0 +1,4 @@
+# Copy this file to local.properties after the Android SDK is installed.
+# Use a Windows path with escaped backslashes, for example:
+# sdk.dir=C\:\\Users\\your-name\\AppData\\Local\\Android\\Sdk
+
