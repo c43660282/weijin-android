@@ -1,0 +1,11 @@
+.gradle/
+.gradle-user-home/
+.idea/
+local.properties
+**/build/
+*.iml
+*.jks
+*.keystore
+keystore.properties
+work/android-sdk/
+work/release-signing-backup/
