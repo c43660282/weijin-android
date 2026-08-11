@@ -1,0 +1,487 @@
+/* Original visual-novel games.  Everything is scoped to the existing app root. */
+#canvas-fan-page .game-choice-icon.is-vn {
+  position: relative;
+  overflow: hidden;
+  color: rgb(255 255 255 / 94%);
+  font-size: .69rem;
+  font-weight: 760;
+  text-shadow: 0 1px 5px rgb(8 12 24 / 45%);
+}
+
+#canvas-fan-page .game-choice-icon.is-vn::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border: 1px solid rgb(255 255 255 / 40%);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+#canvas-fan-page .game-choice-icon.is-lantern {
+  background:
+    radial-gradient(circle at 35% 31%, #ffecc0 0 10%, transparent 31%),
+    linear-gradient(145deg, #bd5d3d, #612b3b 58%, #171825);
+}
+
+#canvas-fan-page .game-choice-icon.is-harbor {
+  background:
+    radial-gradient(circle at 74% 24%, #c9f6f4 0 8%, transparent 26%),
+    linear-gradient(145deg, #2b8e9f, #23546f 56%, #152334);
+}
+
+#canvas-fan-page .game-choice-icon.is-memory {
+  background:
+    radial-gradient(circle at 32% 24%, #f5efff 0 8%, transparent 27%),
+    linear-gradient(145deg, #ba6fce, #5f62ca 52%, #1b2452);
+}
+
+#canvas-fan-page .vn-overlay {
+  --vn-accent: #d98a68;
+  --vn-accent-soft: #f0c799;
+  position: absolute;
+  z-index: 260;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  isolation: isolate;
+  color: #f8f5f0;
+  background: #111722;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#canvas-fan-page .vn-overlay[hidden] {
+  display: none !important;
+}
+
+#canvas-fan-page .vn-backdrop,
+#canvas-fan-page .vn-art-layer,
+#canvas-fan-page .vn-art-shade,
+#canvas-fan-page .vn-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#canvas-fan-page .vn-backdrop {
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 72% 18%, color-mix(in srgb, var(--vn-accent) 35%, transparent), transparent 42%),
+    linear-gradient(155deg, #161c27 0%, #0d1119 100%);
+}
+
+#canvas-fan-page .vn-art-layer {
+  inset: -3.5%;
+  background-color: #171b24;
+  background-repeat: no-repeat;
+  /* Keep each generated square panel undistorted on a tall phone.  The
+     horizontal positions below center the left/right quadrants after the
+     complete sheet is scaled to twice the viewport height. */
+  background-size: auto 200%;
+  opacity: 0;
+  transform: scale(1.035);
+  filter: saturate(.88) contrast(1.03);
+  transition: opacity 720ms ease, filter 720ms ease;
+  will-change: transform, opacity;
+}
+
+#canvas-fan-page .vn-art-layer.is-active {
+  opacity: 1;
+  animation: vn-cinema-drift 16s ease-in-out both;
+}
+
+#canvas-fan-page .vn-art-layer.is-warm { filter: saturate(.92) sepia(.08) contrast(1.04); }
+#canvas-fan-page .vn-art-layer.is-cold { filter: saturate(.8) hue-rotate(7deg) contrast(1.06); }
+#canvas-fan-page .vn-art-layer.is-dream { filter: saturate(.72) brightness(1.04) contrast(.96); }
+#canvas-fan-page .vn-art-layer.is-danger { filter: saturate(.94) sepia(.16) hue-rotate(324deg) contrast(1.08); }
+
+@keyframes vn-cinema-drift {
+  0% { transform: scale(1.045) translate3d(-.5%, -.2%, 0); }
+  100% { transform: scale(1.105) translate3d(1.5%, -.9%, 0); }
+}
+
+#canvas-fan-page .vn-art-shade {
+  z-index: 2;
+  background:
+    linear-gradient(180deg, rgb(3 7 14 / 42%) 0%, transparent 25%, transparent 51%, rgb(3 7 14 / 48%) 74%, rgb(3 7 14 / 88%) 100%),
+    radial-gradient(ellipse at 50% 38%, transparent 15%, rgb(4 8 16 / 14%) 58%, rgb(4 8 16 / 58%) 110%);
+}
+
+#canvas-fan-page .vn-atmosphere {
+  z-index: 3;
+  opacity: .62;
+  background:
+    radial-gradient(circle at 18% 28%, color-mix(in srgb, var(--vn-accent-soft) 22%, transparent) 0 1px, transparent 2px),
+    radial-gradient(circle at 72% 17%, rgb(255 255 255 / 20%) 0 1px, transparent 2px),
+    radial-gradient(circle at 46% 67%, rgb(255 255 255 / 12%) 0 1px, transparent 2px);
+  background-size: 113px 97px, 151px 137px, 83px 109px;
+  animation: vn-dust 13s linear infinite;
+}
+
+@keyframes vn-dust {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(11px, -21px, 0); }
+}
+
+#canvas-fan-page .vn-header {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 62px;
+  padding: max(12px, var(--native-status-safe-top, 36px)) 14px 8px;
+  background: linear-gradient(180deg, rgb(5 9 17 / 64%), transparent);
+}
+
+#canvas-fan-page .vn-header-button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 999px;
+  color: #fff;
+  background: rgb(8 13 22 / 42%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 13%), 0 7px 20px rgb(0 0 0 / 20%);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+}
+
+#canvas-fan-page .vn-title-copy {
+  min-width: 0;
+  display: grid;
+  gap: 1px;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 60%);
+}
+
+#canvas-fan-page .vn-title-copy strong {
+  overflow: hidden;
+  font-size: .97rem;
+  font-weight: 660;
+  letter-spacing: .08em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#canvas-fan-page .vn-title-copy span,
+#canvas-fan-page .vn-save-state {
+  color: rgb(255 255 255 / 68%);
+  font-size: .67rem;
+}
+
+#canvas-fan-page .vn-save-state {
+  display: grid;
+  justify-items: end;
+  gap: 1px;
+  padding: 6px 9px;
+  border-radius: 13px;
+  background: rgb(7 12 21 / 30%);
+  text-shadow: 0 1px 8px rgb(0 0 0 / 58%);
+}
+
+#canvas-fan-page .vn-save-state::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--vn-accent-soft);
+  box-shadow: 0 0 9px var(--vn-accent-soft);
+}
+
+#canvas-fan-page .vn-route-mark {
+  position: absolute;
+  z-index: 8;
+  top: max(76px, calc(var(--native-status-safe-top, 36px) + 58px));
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: calc(100% - 32px);
+  padding: 6px 10px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 999px;
+  color: rgb(255 255 255 / 77%);
+  background: rgb(7 12 21 / 30%);
+  box-shadow: 0 7px 19px rgb(0 0 0 / 16%);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  font-size: .68rem;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 54%);
+}
+
+#canvas-fan-page .vn-route-mark i {
+  display: block;
+  width: 24px;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 15%);
+}
+
+#canvas-fan-page .vn-route-mark i::after {
+  content: "";
+  display: block;
+  width: var(--vn-progress, 8%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--vn-accent), var(--vn-accent-soft));
+  box-shadow: 0 0 7px var(--vn-accent);
+  transition: width 420ms cubic-bezier(.2,.8,.2,1);
+}
+
+#canvas-fan-page .vn-start-card,
+#canvas-fan-page .vn-ending-card {
+  position: absolute;
+  z-index: 14;
+  left: 18px;
+  right: 18px;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  display: grid;
+  gap: 12px;
+  padding: 20px 18px 18px;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 82% 8%, color-mix(in srgb, var(--vn-accent) 23%, transparent), transparent 38%),
+    linear-gradient(150deg, rgb(15 20 31 / 82%), rgb(7 12 21 / 72%));
+  box-shadow: 0 24px 62px rgb(0 0 0 / 34%), inset 0 1px 0 rgb(255 255 255 / 13%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+#canvas-fan-page .vn-start-card[hidden],
+#canvas-fan-page .vn-ending-card[hidden],
+#canvas-fan-page .vn-dialogue-deck[hidden] {
+  display: none !important;
+}
+
+#canvas-fan-page .vn-start-eyebrow,
+#canvas-fan-page .vn-ending-eyebrow {
+  color: var(--vn-accent-soft);
+  font-size: .7rem;
+  letter-spacing: .16em;
+}
+
+#canvas-fan-page .vn-start-card h2,
+#canvas-fan-page .vn-ending-card h2 {
+  margin: 0;
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: clamp(1.45rem, 7vw, 2rem);
+  font-weight: 620;
+  letter-spacing: .12em;
+  text-shadow: 0 4px 18px rgb(0 0 0 / 54%);
+}
+
+#canvas-fan-page .vn-start-card p,
+#canvas-fan-page .vn-ending-card p {
+  margin: 0;
+  color: rgb(255 255 255 / 77%);
+  font-size: .82rem;
+  line-height: 1.72;
+}
+
+#canvas-fan-page .vn-start-actions,
+#canvas-fan-page .vn-ending-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+#canvas-fan-page .vn-action {
+  min-width: 0;
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid rgb(255 255 255 / 17%);
+  border-radius: 18px;
+  color: rgb(255 255 255 / 90%);
+  background: rgb(255 255 255 / 8%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 11%);
+}
+
+#canvas-fan-page .vn-action.is-primary {
+  color: #15151c;
+  background: linear-gradient(135deg, var(--vn-accent-soft), var(--vn-accent));
+  border-color: rgb(255 255 255 / 23%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 38%), 0 8px 22px color-mix(in srgb, var(--vn-accent) 32%, transparent);
+}
+
+#canvas-fan-page .vn-dialogue-deck {
+  position: absolute;
+  z-index: 12;
+  left: 12px;
+  right: 12px;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  display: grid;
+  gap: 8px;
+  max-height: min(48vh, 390px);
+}
+
+#canvas-fan-page .vn-dialogue-card {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  min-height: 112px;
+  padding: 18px 17px 15px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 15%);
+  border-radius: 26px;
+  background:
+    linear-gradient(135deg, rgb(17 23 34 / 86%), rgb(7 12 20 / 76%));
+  box-shadow: 0 18px 48px rgb(0 0 0 / 32%), inset 0 1px 0 rgb(255 255 255 / 12%);
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+}
+
+#canvas-fan-page .vn-dialogue-card::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 0;
+  width: 58px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--vn-accent), transparent);
+  box-shadow: 0 0 12px var(--vn-accent);
+}
+
+#canvas-fan-page .vn-speaker {
+  color: var(--vn-accent-soft);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+#canvas-fan-page .vn-dialogue-text {
+  min-height: 3.4em;
+  color: rgb(255 255 255 / 92%);
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: clamp(.92rem, 4.2vw, 1.06rem);
+  line-height: 1.72;
+  letter-spacing: .025em;
+  text-shadow: 0 2px 9px rgb(0 0 0 / 52%);
+}
+
+#canvas-fan-page .vn-tap-hint {
+  justify-self: end;
+  color: rgb(255 255 255 / 45%);
+  font-size: .65rem;
+}
+
+#canvas-fan-page .vn-choices {
+  display: grid;
+  gap: 7px;
+  max-height: 190px;
+  padding: 2px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+#canvas-fan-page .vn-choices::-webkit-scrollbar { display: none; }
+
+#canvas-fan-page .vn-choice {
+  position: relative;
+  width: 100%;
+  min-height: 43px;
+  padding: 9px 42px 9px 14px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 18px;
+  color: rgb(255 255 255 / 90%);
+  background: linear-gradient(135deg, rgb(18 25 37 / 82%), rgb(9 15 24 / 72%));
+  box-shadow: 0 8px 23px rgb(0 0 0 / 23%), inset 0 1px 0 rgb(255 255 255 / 9%);
+  font-size: .79rem;
+  line-height: 1.45;
+  text-align: left;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: vn-choice-arrive 360ms cubic-bezier(.18,.85,.26,1) both;
+}
+
+#canvas-fan-page .vn-choice::after {
+  content: "›";
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  color: var(--vn-accent-soft);
+  font-size: 1.1rem;
+  transform: translateY(-50%);
+}
+
+#canvas-fan-page .vn-choice:nth-child(2) { animation-delay: 50ms; }
+#canvas-fan-page .vn-choice:nth-child(3) { animation-delay: 100ms; }
+#canvas-fan-page .vn-choice:nth-child(4) { animation-delay: 150ms; }
+
+@keyframes vn-choice-arrive {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#canvas-fan-page .vn-choice:active,
+#canvas-fan-page .vn-action:active,
+#canvas-fan-page .vn-header-button:active {
+  filter: brightness(1.1);
+}
+
+#canvas-fan-page .vn-ending-card {
+  text-align: left;
+}
+
+#canvas-fan-page .vn-ending-route {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#canvas-fan-page .vn-ending-route span {
+  padding: 4px 8px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 999px;
+  color: rgb(255 255 255 / 62%);
+  background: rgb(255 255 255 / 5%);
+  font-size: .64rem;
+}
+
+#canvas-fan-page .vn-toast {
+  position: absolute;
+  z-index: 30;
+  top: max(76px, calc(var(--native-status-safe-top, 36px) + 58px));
+  left: 50%;
+  max-width: calc(100% - 40px);
+  padding: 7px 11px;
+  border: 1px solid rgb(255 255 255 / 13%);
+  border-radius: 999px;
+  color: rgb(255 255 255 / 78%);
+  background: rgb(8 13 22 / 54%);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 24%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: .68rem;
+  transform: translateX(-50%);
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+
+#canvas-fan-page .vn-toast[hidden] { display: none !important; }
+
+@media (max-height: 680px) {
+  #canvas-fan-page .vn-dialogue-deck { max-height: 52vh; }
+  #canvas-fan-page .vn-dialogue-card { min-height: 96px; padding: 14px 15px 12px; }
+  #canvas-fan-page .vn-dialogue-text { font-size: .89rem; line-height: 1.56; }
+  #canvas-fan-page .vn-start-card, #canvas-fan-page .vn-ending-card { padding: 16px; gap: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #canvas-fan-page .vn-art-layer.is-active,
+  #canvas-fan-page .vn-atmosphere,
+  #canvas-fan-page .vn-choice {
+    animation: none !important;
+  }
+}
