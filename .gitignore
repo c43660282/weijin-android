@@ -8,4 +8,4 @@ local.properties
 *.keystore
 keystore.properties
 work/android-sdk/
-work/release-signing-backup/
+work/release-signing-backup*/
