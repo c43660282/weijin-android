@@ -1,0 +1,452 @@
+{
+  "id": "mist_harbor_letters",
+  "title": "雾港来信",
+  "subtitle": "有些灯不是为了照亮海面，而是为了让过去知道你还在。",
+  "version": 1,
+  "initialNode": "arrival",
+  "initialState": {
+    "truth": 0,
+    "trust": 0,
+    "courage": 0,
+    "mercy": 0,
+    "flags": {}
+  },
+  "assets": {
+    "sheet": "scene-sheet.png",
+    "scenes": {
+      "harbor": "top-left",
+      "lighthouse": "top-right",
+      "breakwater": "bottom-left",
+      "radio_dawn": "bottom-right"
+    }
+  },
+  "nodes": [
+    {
+      "id": "arrival",
+      "scene": "harbor",
+      "speaker": "旁白",
+      "text": "凌晨四点，白汐港的雾把码头压成一张潮湿的纸。林岚回来处理父亲林渡留下的旧电台，却在关闭十二年的港口邮筒里发现一封干燥的信——邮戳是三天后，收件人写着她现在住的房间号。",
+      "choices": [
+        {
+          "text": "现在拆开信",
+          "next": "letter_one",
+          "effects": { "truth": 1, "flags": { "openedImmediately": true } }
+        },
+        {
+          "text": "先去旧电台，确认是谁开过邮筒",
+          "next": "station_door",
+          "effects": { "courage": 1, "flags": { "keptLetterSealed": true } }
+        }
+      ]
+    },
+    {
+      "id": "letter_one",
+      "scene": "harbor",
+      "speaker": "信上的字",
+      "text": "“今晚二十三点十七分，不要让旧灯塔熄灭。听见我的声音时，也别相信我。——沈舟。”沈舟是十五年前鸥汛事故中失踪的女孩，也是林岚童年记忆里唯一没有脸的人。纸角沾着尚未干透的海盐。",
+      "choices": [
+        {
+          "text": "把信折回原样，继续去电台",
+          "next": "station_door",
+          "effects": { "trust": 1, "flags": { "keptFirstLetter": true } }
+        },
+        {
+          "text": "用手机拍下邮戳和盐渍",
+          "next": "station_door",
+          "effects": { "truth": 1, "flags": { "photographedLetter": true } }
+        }
+      ]
+    },
+    {
+      "id": "station_door",
+      "scene": "radio_dawn",
+      "speaker": "林岚",
+      "text": "旧电台的门锁没有撬痕，屋里却有一杯温热的黑茶。停电多年的短波机亮着一粒绿灯，指针守在 2177 千赫；话筒下压着父亲的便笺：“如果她回来，先让她听完。”门外传来港务员何姨拖鞋踏水的声音。",
+      "choices": [
+        {
+          "text": "开门问何姨，十五年前究竟少了谁",
+          "next": "aunt_he",
+          "effects": { "truth": 1, "flags": { "confrontedAunt": true } }
+        },
+        {
+          "text": "先锁门，独自守住这台正在工作的机器",
+          "next": "radio_call",
+          "effects": { "courage": 1, "flags": { "hidFromAunt": true } }
+        }
+      ]
+    },
+    {
+      "id": "aunt_he",
+      "scene": "harbor",
+      "speaker": "何姨",
+      "text": "何姨看见那封信，脸色像被雾擦白了。“鸥汛那夜上塔的是两个孩子。林渡抱回一个，另一个被记成沈舟。可第二天起，他再也不许任何人叫幸存者的小名。”她说，灯塔今晚会因线路改造永久断电。",
+      "choices": [
+        {
+          "text": "把未来邮戳告诉她，请她帮忙守住电源",
+          "next": "radio_call",
+          "effects": { "trust": 2, "mercy": 1, "flags": { "auntWillHelp": true } }
+        },
+        {
+          "text": "只问灯塔钥匙，不让她卷进来",
+          "next": "radio_call",
+          "effects": { "courage": 1, "flags": { "tookTowerKey": true } }
+        }
+      ]
+    },
+    {
+      "id": "radio_call",
+      "scene": "radio_dawn",
+      "speaker": "短波中的女声",
+      "text": "五点整，静电忽然收束成呼吸。一个和林岚极相似、却更疲惫的声音说：“第一封信到了。你会以为我是沈舟，也会以为我是未来的你——这两件事都只对了一半。上塔，把透镜转回东偏十一度。”",
+      "choices": [
+        {
+          "text": "回答：“先说出只有我知道的事。”",
+          "next": "tower_stairs",
+          "effects": { "truth": 1, "trust": -1, "flags": { "challengedVoice": true } }
+        },
+        {
+          "text": "保持静默，录下她的呼吸和背景雾号",
+          "next": "tower_stairs",
+          "effects": { "truth": 2, "flags": { "recordedVoice": true } }
+        },
+        {
+          "text": "回答：“沈舟，我去。”",
+          "next": "tower_stairs",
+          "effects": { "trust": 2, "flags": { "calledVoiceShenzhou": true } }
+        }
+      ]
+    },
+    {
+      "id": "tower_stairs",
+      "scene": "lighthouse",
+      "speaker": "旁白",
+      "text": "灯塔的螺旋梯上，每隔七级便刻着一道身高。最上面的两道停在同一年，一道写“岚”，一道只剩被刮掉的舟字旁。林岚发现自己掌心的旧疤，恰好能嵌进扶手上一块缺口。",
+      "choices": [
+        {
+          "text": "沿着刻痕数到第217级",
+          "next": "lens_room",
+          "effects": { "truth": 1, "flags": { "countedSteps": true } }
+        },
+        {
+          "text": "不再看刻痕，径直进入灯室",
+          "next": "lens_room",
+          "effects": { "courage": 1 }
+        }
+      ]
+    },
+    {
+      "id": "lens_room",
+      "scene": "lighthouse",
+      "speaker": "林岚",
+      "text": "菲涅尔透镜像一只由玻璃组成的眼睛。主轴停在西侧，而底座上有一条被反复磨亮的东偏十一度刻线；供电柜却贴着“转向会触发旧雾号”的警告。灯室外，海雾正向航道最窄处合拢。",
+      "choices": [
+        {
+          "text": "照女声所说，转动透镜",
+          "next": "keeper_log",
+          "effects": { "trust": 2, "courage": 1, "flags": { "alignedLens": true } }
+        },
+        {
+          "text": "先拔掉雾号保险，再转动透镜",
+          "next": "keeper_log",
+          "effects": { "truth": 1, "flags": { "mutedFogHorn": true } }
+        }
+      ]
+    },
+    {
+      "id": "keeper_log",
+      "scene": "lighthouse",
+      "speaker": "林渡的航标日志",
+      "text": "透镜转到刻线时，光束照出墙夹层中的值班日志。鸥汛事故那页被父亲写了三遍：第一遍是“救起林岚”；第二遍改成“救起沈舟”；第三遍只剩一句，“我叫错了名字，她却回了头。”页缝里夹着两张同日体检单，血型与她现在的档案相反。",
+      "choices": [
+        {
+          "text": "收起日志，承认父亲可能伪造了身份",
+          "next": "cassette",
+          "effects": { "truth": 2, "flags": { "acceptedForgeryPossible": true } }
+        },
+        {
+          "text": "先寻找能推翻日志的证据",
+          "next": "cassette",
+          "effects": { "trust": -1, "flags": { "resistedLog": true } }
+        }
+      ]
+    },
+    {
+      "id": "cassette",
+      "scene": "lighthouse",
+      "speaker": "林渡的录音",
+      "text": "磁带里，父亲年轻的声音被风割得断断续续：“我抱上岸的孩子说自己叫沈舟。她高烧后什么都不记得。我失去了岚，也不敢再失去一个女儿……于是我让全港陪我撒谎。”录音末尾还有少女敲击管道的节奏：短、短、长，正是林岚失眠时无意识敲出的习惯。",
+      "choices": [
+        {
+          "text": "听完父亲的道歉，不替他原谅自己",
+          "next": "second_letter",
+          "effects": { "truth": 2, "mercy": 1, "flags": { "heardFullConfession": true } }
+        },
+        {
+          "text": "在最后一句前按停，带走磁带",
+          "next": "second_letter",
+          "effects": { "courage": 1, "flags": { "stoppedCassette": true } }
+        }
+      ]
+    },
+    {
+      "id": "second_letter",
+      "scene": "lighthouse",
+      "speaker": "第二封信",
+      "text": "透镜底座弹出一只从未见过的黄铜信匣，里面的信仍带着三天后的邮戳：“你现在叫林岚，是因为真正的林岚没有从那场雾里回来。别急着恨林渡；二十三点十七分，你会有一次把两个名字都还回去的机会。”署名仍是沈舟，笔迹与她完全相同。",
+      "choices": [
+        {
+          "text": "把自己的签名写在旁边比对",
+          "next": "storm_warning",
+          "effects": { "truth": 1, "flags": { "matchedHandwriting": true } }
+        },
+        {
+          "text": "撕下署名，拒绝被一封信定义",
+          "next": "storm_warning",
+          "effects": { "courage": 1, "flags": { "toreSignature": true } }
+        }
+      ]
+    },
+    {
+      "id": "storm_warning",
+      "scene": "harbor",
+      "speaker": "港区广播",
+      "text": "傍晚，未被气象台命名的低压突然封港。一艘近海调查船失去定位，旧防波堤上的人工雾号却有人连续按出“短、短、长”。与此同时，电台自动打印出第三行未来传真：先救敲灯的人，否则今夜没人能替你回答。",
+      "choices": [
+        {
+          "text": "冒雨去防波堤寻找敲灯的人",
+          "next": "breakwater",
+          "effects": { "mercy": 2, "courage": 1, "flags": { "wentToBreakwater": true } }
+        },
+        {
+          "text": "留在电台追踪调查船和未来信号",
+          "next": "radio_decode",
+          "effects": { "truth": 2, "flags": { "stayedAtRadio": true } }
+        }
+      ]
+    },
+    {
+      "id": "breakwater",
+      "scene": "breakwater",
+      "speaker": "少年阿澈",
+      "text": "防波堤尽头，实习引航员阿澈被浪困在红色航标下。他说自己听见一个女孩从废弃检修管里呼救，还准确说出了他下一句话。林岚把安全绳扣在两人腰间时，管道深处传来童声：“沈舟，不要再替我回头。”",
+      "choices": [
+        {
+          "text": "先把阿澈送回岸上，再记录童声",
+          "next": "radio_decode",
+          "effects": { "mercy": 2, "flags": { "savedAcher": true } }
+        },
+        {
+          "text": "让阿澈抓紧绳索，自己贴近管口回答",
+          "next": "radio_decode",
+          "effects": { "truth": 1, "courage": 2, "flags": { "answeredPipe": true } }
+        }
+      ]
+    },
+    {
+      "id": "radio_decode",
+      "scene": "radio_dawn",
+      "speaker": "林岚",
+      "text": "回到电台后，录下的雾号与短波脉冲叠在一起，恰好组成灯塔东侧维护梯的旧坐标。调查船并非失去定位，而是在跟随一组十五年前就已注销的航标信号。那组信号的呼号，登记人是九岁的林岚。",
+      "choices": [
+        {
+          "text": "用父亲的日志校正旧坐标",
+          "next": "voice_linlan",
+          "effects": { "truth": 2, "flags": { "decodedEastLadder": true } }
+        },
+        {
+          "text": "让何姨调出鸥汛当夜的港务录音",
+          "next": "voice_linlan",
+          "effects": { "trust": 1, "truth": 1, "flags": { "usedHarborArchive": true } }
+        }
+      ]
+    },
+    {
+      "id": "voice_linlan",
+      "scene": "radio_dawn",
+      "speaker": "童年的林岚",
+      "text": "二十二点四十分，频率里不再是成年女声，而是一个九岁女孩：“我叫林岚。沈舟在我旁边，她撞到头了。林叔叔一直在北门喊，可北门已经被海水堵住。”背景里，年轻的林渡正反复喊着“岚，回头”。林岚终于明白，父亲那一声让真正的女儿回了头，也让沈舟独自爬向东梯。",
+      "choices": [
+        {
+          "text": "告诉童年林岚：护住沈舟，等东梯的光",
+          "next": "identity_proof",
+          "effects": { "mercy": 2, "trust": 1, "flags": { "promisedBothGirls": true } }
+        },
+        {
+          "text": "先问她只有真正林岚才知道的童年秘密",
+          "next": "identity_proof",
+          "effects": { "truth": 2, "flags": { "verifiedLinlanVoice": true } }
+        }
+      ]
+    },
+    {
+      "id": "identity_proof",
+      "scene": "lighthouse",
+      "speaker": "旁白",
+      "text": "童声说出了林渡藏生日礼物的位置，却不知道沈舟敲管道的节奏。成年女声随后回来：“你不是冒名者。你是一个被悲伤改过名字、仍然努力活到今天的人。现在的问题不是你是谁，而是你愿意让谁从那夜走出来。”",
+      "choices": [
+        {
+          "text": "承认“我是沈舟，也曾经作为林岚活过”",
+          "next": "third_letter",
+          "effects": { "truth": 2, "courage": 2, "flags": { "acceptedDualIdentity": true } }
+        },
+        {
+          "text": "坚持现在的名字，拒绝让过去抹掉十五年",
+          "next": "third_letter",
+          "effects": { "courage": 2, "flags": { "keptLinlanName": true } }
+        }
+      ]
+    },
+    {
+      "id": "third_letter",
+      "scene": "radio_dawn",
+      "speaker": "未来的沈舟",
+      "text": "传真机吐出最后一封信。这次没有邮戳，只有一行她刚刚才想到、尚未说出口的话：“如果两个孩子都活下来，写信的我就不会存在；如果你维持原样，真正的林岚会永远停在那句回头里。别为保存一个声音，牺牲一个人的一生。”林岚意识到，成年女声正是做出选择后的自己。",
+      "choices": [
+        {
+          "text": "把三封信按时间倒序排开，寻找未发生的缝隙",
+          "next": "route_choice",
+          "effects": { "truth": 2, "flags": { "sawTimeLoop": true } }
+        },
+        {
+          "text": "烧掉最后一封，只保留自己的判断",
+          "next": "route_choice",
+          "effects": { "courage": 2, "flags": { "burnedFinalLetter": true } }
+        }
+      ]
+    },
+    {
+      "id": "route_choice",
+      "scene": "breakwater",
+      "speaker": "何姨",
+      "text": "距离二十三点十七分还有九分钟。何姨带来备用电瓶，阿澈把调查船的回波投到旧雷达上：现在的船正逼近暗礁，过去的两个孩子也只剩一次涨潮的时间。灯塔的电力只能同时维持透镜、雾号、电台中的两项。",
+      "choices": [
+        {
+          "text": "保透镜与雾号：用光和声音同时标出东梯",
+          "next": "past_broadcast",
+          "effects": { "mercy": 1, "flags": { "routeLightAndHorn": true } }
+        },
+        {
+          "text": "保透镜与电台：让童年的她们听清每一句话",
+          "next": "past_broadcast",
+          "effects": { "trust": 2, "flags": { "routeLightAndRadio": true } }
+        },
+        {
+          "text": "保雾号与电台：把灯塔变成看不见的声音航标",
+          "next": "past_broadcast",
+          "effects": { "courage": 1, "truth": 1, "flags": { "routeHornAndRadio": true } }
+        }
+      ]
+    },
+    {
+      "id": "past_broadcast",
+      "scene": "lighthouse",
+      "speaker": "林岚 / 沈舟",
+      "text": "二十三点十七分，玻璃透镜把整片雾照成旋转的白墙。她同时听见十五年前的哭声和三天后自己的呼吸。年轻的林渡还在北门呼喊，东梯的金属扣则随着浪涌发出三次清脆回声——那是唯一可能让两个孩子一起离开的路。",
+      "choices": [
+        {
+          "text": "向父亲喊出东梯坐标：“别叫名字，两个都牵住！”",
+          "next": "present_siren",
+          "effects": { "mercy": 3, "courage": 2, "flags": { "orderedDualRescue": true } }
+        },
+        {
+          "text": "只呼叫真正的林岚，让她独自去东梯",
+          "next": "ending_sacrifice",
+          "effects": { "flags": { "savedOriginalLinlanOnly": true } }
+        },
+        {
+          "text": "砸掉发射器，不再允许任何人替别人选择人生",
+          "next": "ending_nameless",
+          "effects": { "flags": { "destroyedEcho": true } }
+        }
+      ]
+    },
+    {
+      "id": "present_siren",
+      "scene": "breakwater",
+      "speaker": "阿澈",
+      "text": "过去传来两只手同时扣上东梯的声音，现实却立刻开始褪色。调查船的雷达点仍在冲向暗礁，备用电瓶只剩最后一格。若切断回声转而呼叫现在的船，旧时间线会固定；若保持回声，就只能靠人工雾号为调查船留下方向。",
+      "choices": [
+        {
+          "text": "让何姨连续鸣雾号，自己保持过去的连接",
+          "next": "final_name",
+          "effects": { "trust": 2, "mercy": 2, "flags": { "trustedAuntWithPresent": true } }
+        },
+        {
+          "text": "切回现代频段，先救眼前调查船",
+          "next": "ending_borrowed",
+          "effects": { "mercy": 2, "flags": { "savedPresentShip": true } }
+        }
+      ]
+    },
+    {
+      "id": "final_name",
+      "scene": "radio_dawn",
+      "speaker": "童年的两个女孩",
+      "text": "“我们抓住了。”两个童声重叠在一起。时间线合拢前，电台要求最后一次身份确认；屏幕上只有一条空白呼号。她明白，必须用一个名字回应，而那个名字会决定新黎明里谁记得这场雾。",
+      "choices": [
+        {
+          "text": "输入“沈舟”，然后说：“林岚，天亮见。”",
+          "next": "ending_dual",
+          "effects": { "flags": { "claimedShenzhouName": true } }
+        },
+        {
+          "text": "输入“林岚”，把十五年的生活完整留下",
+          "next": "ending_borrowed",
+          "effects": { "flags": { "retainedLinlanIdentity": true } }
+        }
+      ]
+    },
+    {
+      "id": "ending_dual",
+      "scene": "radio_dawn",
+      "speaker": "旁白",
+      "text": "黎明，沈舟在电台桌前醒来，手机里多出十五年从未经历过的合照：林岚成为港区医生，林渡在事故次年公开了错误，也真正收养了她。门外有人敲出短、短、长。林岚提着两杯黑茶说：“你又梦见那场雾了？”远处，灯塔与调查船同时鸣笛。三封未来来信已经变成三张空白纸，只有她们都记得上面的字。",
+      "choices": [],
+      "ending": {
+        "id": "dual_dawn",
+        "title": "双灯归港",
+        "tone": "圆满而带余韵",
+        "summary": "两个孩子都获救，沈舟取回真实姓名，林岚也活在新的时间线中。"
+      }
+    },
+    {
+      "id": "ending_borrowed",
+      "scene": "radio_dawn",
+      "speaker": "林岚",
+      "text": "调查船循着现代电台的指令驶离暗礁，过去的连接在最后一秒断开。她仍叫林岚，却把父亲的日志、磁带和自己的血型报告交给港史馆，并在展柜上写下两个名字。多年后，她偶尔会收到没有邮戳的空信；每当雾起，她便在背面写一句近况，再投回那只关闭的邮筒。她没有归还十五年，也没有继续隐瞒它。",
+      "choices": [],
+      "ending": {
+        "id": "borrowed_name",
+        "title": "借名而生",
+        "tone": "现实、克制、释然",
+        "summary": "时间线被保留，主角继续以林岚生活，但公开真相并承认沈舟。"
+      }
+    },
+    {
+      "id": "ending_nameless",
+      "scene": "harbor",
+      "speaker": "旁白",
+      "text": "发射器碎裂后，雾里的声音全部停止。她救下的不是过去，而是今后不再被任何名字安排的自己。父亲的日志被海风吹散，调查船靠阿澈临时点亮的红标擦过暗礁。三天后，她离开白汐港，身份证仍写林岚，旅行簿第一页却没有署名。很久以后，有人问她来自哪里，她只答：“一座终于允许人迷路的港口。”",
+      "choices": [],
+      "ending": {
+        "id": "nameless_tide",
+        "title": "无名潮汐",
+        "tone": "开放、孤独、自由",
+        "summary": "主角拒绝时间回声和两种既定身份，以未定义的人生离港。"
+      }
+    },
+    {
+      "id": "ending_sacrifice",
+      "scene": "lighthouse",
+      "speaker": "最后一盘磁带",
+      "text": "真正的林岚听见呼叫，独自从东梯获救。灯室中的成年身影像被潮水冲淡，连何姨也忘了这里曾有另一个人。新的黎明里，林岚打开父亲留下的电台，只找到一盘没有登记的磁带。里面的女声说：“我叫沈舟。我活过十五年，喜欢黑茶，怕太安静的房间。请你替我记住，这不是一场错误。”林岚把磁带标成第一号馆藏。",
+      "choices": [],
+      "ending": {
+        "id": "one_returns",
+        "title": "雾中同船",
+        "tone": "悲伤、自我牺牲",
+        "summary": "主角让真正的林岚获救，自己的时间线消失，只在一盘磁带中留下存在证明。"
+      }
+    }
+  ]
+}
